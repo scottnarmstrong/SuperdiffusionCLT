@@ -2,7 +2,8 @@ name: Palomar render preflight
 
 # Runs the Challenge rendering of Palomar's `render-challenge.yml` (PalomarRegistry/PalomarSubmission, MIT, pinned
 # at d4e41c1) on a commit of this repository, for the Theorem A comparator configuration. Palomar's own render
-# workflow is dispatch-only, so its steps are reproduced here with the renderer checked out at the pinned commit.
+# workflow is dispatch-only, so its steps are reproduced here with the renderer checked out at the pinned commit,
+# under the GitHub-hosted execution profile `palomar-standard-v1` (the default profile names Palomar's own runners).
 
 "on":
   workflow_dispatch:
@@ -35,13 +36,13 @@ jobs:
           persist-credentials: false
       - id: resolve
         env:
-          PALOMAR_EXECUTION_PROFILE: ""
+          PALOMAR_EXECUTION_PROFILE: "palomar-standard-v1"
         run: python3 scripts/verification_profile.py --resolve
   render:
     needs: profile
     runs-on: ${{ fromJSON(needs.profile.outputs.labels) }}
     env:
-      PALOMAR_EXECUTION_PROFILE: ""
+      PALOMAR_EXECUTION_PROFILE: "palomar-standard-v1"
     timeout-minutes: ${{ fromJSON(needs.profile.outputs.render_timeout) }}
     steps:
       - name: Validate request identifier
