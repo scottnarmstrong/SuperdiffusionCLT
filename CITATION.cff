@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite it as below."
+title: "SuperdiffusionCLT: a Lean 4 formalization of the superdiffusive central limit theorem for a Brownian particle in a critically-correlated incompressible random drift"
+abstract: >-
+  A machine-checked Lean 4 / mathlib formalization of the paper of Armstrong, Bou-Rabee and Kuusi on a
+  Brownian particle in a critically-correlated incompressible random drift: the quenched superdiffusive
+  invariance principle (Theorem A), quantitative homogenization (Theorem B), the large-scale C^{0,γ} and
+  C^{1,γ} estimates (Theorems C and D), and the asymptotics of the renormalized diffusivities, built on the
+  public CoarseGraining homogenization library and the public MarkovProcess library. The library contains
+  no sorry and no custom axiom.
+type: software
+authors:
+  - family-names: Armstrong
+    given-names: Scott
+keywords:
+  - Lean
+  - mathlib
+  - formal verification
+  - superdiffusion
+  - stochastic homogenization
+  - central limit theorem
+license: Apache-2.0
+repository-code: "https://github.com/scottnarmstrong/SuperdiffusionCLT"
+references:
+  - type: article
+    title: "Superdiffusive central limit theorem for a Brownian particle in a critically-correlated incompressible random drift"
+    authors:
+      - family-names: Armstrong
+        given-names: Scott
+      - family-names: Bou-Rabee
+        given-names: Ahmed
+      - family-names: Kuusi
+        given-names: Tuomo
+    url: "https://arxiv.org/abs/2404.01115"
+    identifiers:
+      - type: other
+        value: "arXiv:2404.01115v3"
+    notes: "The paper formalized by this repository."

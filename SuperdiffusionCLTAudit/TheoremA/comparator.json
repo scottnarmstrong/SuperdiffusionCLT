@@ -1,0 +1,7 @@
+{
+  "challenge_module": "SuperdiffusionCLTAudit.TheoremA.Challenge",
+  "solution_module": "SuperdiffusionCLTAudit.TheoremA.Solution",
+  "theorem_names": ["SuperdiffusionCLT.StatementAudit.TheoremA.theoremA"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

@@ -1,0 +1,172 @@
+version: "v0.4"
+
+project:
+  name: "Superdiffusive central limit theorem for a Brownian particle in a critically-correlated incompressible random drift"
+  description: >-
+    A Lean formalization of the superdiffusive central limit theorem for a Brownian particle in a
+    critically-correlated incompressible random drift (Armstrong, Bou-Rabee and Kuusi): the quenched
+    superdiffusive invariance principle (Theorem A), quantitative homogenization of the Dirichlet problem
+    (Theorem B), the large-scale C^{0,gamma} and C^{1,gamma} regularity theory (Theorems C and D) and the sharp
+    asymptotics of the renormalized diffusivities (Theorem 5.1), with every result of Sections 2 to 8 of the paper
+    that their proofs use. It is built on the public CoarseGraining homogenization library and the public
+    MarkovProcess library.
+  authors:
+    - "Scott Armstrong"
+  responsible_maintainers:
+    - "Scott Armstrong"
+  license: "Apache-2.0"
+
+classification:
+  arxiv: ["math.PR", "math-ph", "math.AP"]
+  msc2020: ["60K37", "35B27", "60J60", "60F17"]
+
+sources:
+  - title: "Superdiffusive central limit theorem for a Brownian particle in a critically-correlated incompressible random drift"
+    authors:
+      - "Scott Armstrong"
+      - "Ahmed Bou-Rabee"
+      - "Tuomo Kuusi"
+    id: "arXiv:2404.01115"
+    url: "https://arxiv.org/abs/2404.01115"
+    type: "paper"
+    relationship: "formalizes"
+    note: >-
+      Version 3 of the preprint. Corrections found during the formalization are listed in ERRATA.md; none of
+      them changes the statements of the main theorems of version 3.
+    license: "all rights reserved"
+    author_contacted: "n/a"     # the formalizer is an author of the source
+    prior_work: ""
+  - title: "Renormalization group and elliptic homogenization in high contrast"
+    authors:
+      - "Scott Armstrong"
+      - "Tuomo Kuusi"
+    type: "paper"
+    relationship: "uses"
+    note: >-
+      Its Theorem 6.1 is an input of Section 4 of the paper; it is proved here, in corrected form (ERRATA.md,
+      items AK1 to AK6), for the cutoff fields of the paper.
+
+related_formalizations:
+  - id: "https://github.com/scottnarmstrong/CoarseGraining"
+    relationship: "builds-on"
+    note: "Scott Armstrong and Tuomo Kuusi, CoarseGraining (homogenization library), pinned git dependency."
+  - id: "https://github.com/scottnarmstrong/MarkovProcess"
+    relationship: "builds-on"
+    note: "Scott Armstrong, MarkovProcess (continuous-time Markov processes), pinned git dependency."
+
+status:
+  scope: >-
+    Theorems A, B, C, D and Theorem 5.1 of the paper, and every result of Sections 2 to 8 that their proofs
+    use, are proved from the paper's assumptions (J1) to (J5) on the law of the random shells. The formal proof
+    of Theorem A replaces the parabolic Lemmas 8.2 and 8.3 and the Nash-Aronson estimates of Appendix B by an
+    elliptic argument. The log-correlated Gaussian example of Appendix A is not formalized; instead a
+    nondegenerate Gaussian shell law is constructed and shown to satisfy all the assumptions, so the theorems
+    are not vacuous.
+  sorry_count: 0
+  sorry_count_scope: "SuperdiffusionCLT library"
+  comparator_challenge_sorry_count: 1
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "SuperdiffusionCLT.Frozen.Section8.theoremA"
+      file: "SuperdiffusionCLT/Frozen/Section8/TheoremA.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "SuperdiffusionCLTAudit/TheoremA/comparator.json"
+      literature_dependencies: []
+    - declaration: "SuperdiffusionCLT.Frozen.Section7.superdiffusivity"
+      file: "SuperdiffusionCLT/Frozen/Section7/Superdiffusivity.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      literature_dependencies: []
+    - declaration: "SuperdiffusionCLT.Frozen.Section7.large_scale_holder"
+      file: "SuperdiffusionCLT/Frozen/Section7/LargeScaleHolder.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      literature_dependencies: []
+    - declaration: "SuperdiffusionCLT.Frozen.Section6.c1beta"
+      file: "SuperdiffusionCLT/Frozen/Section6/C1Beta.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      literature_dependencies: []
+    - declaration: "SuperdiffusionCLT.Frozen.Section5.sigmaBar_sharp_bounds"
+      file: "SuperdiffusionCLT/Frozen/Section5/SigmaBarSharpBounds.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      literature_dependencies: []
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "claude-opus-5.5"
+        - "claude-fable-5.1"
+        - "claude-opus-5"
+        - "claude-sonnet (subagents)"
+        - "OpenAI models through Codex"
+      framework: "Claude Code (Anthropic) and Codex (OpenAI) agentic coding harnesses; most code by the Claude models"
+      tool_setup: >-
+        Lake builds under leanprover/lean4:v4.35.0-rc2 with Mathlib v4.35.0-rc2, the public CoarseGraining
+        library and the public MarkovProcess library at pinned revisions. The CI workflow builds the library
+        with warnings treated as failures and checks the axioms of every stated theorem.
+      cost:
+        wall_time: "approximately seven weeks of agentic work (August to October 2026)"
+        spend_usd: "not separately tracked (subscription accounts)"
+        hardware: "a shared 16-CPU / 124 GB RAM Ubuntu machine"
+      prompting_notes: >-
+        Human-directed agent work, closely supervised by the author; the statements of the main results were
+        approved by the author; differences from the paper are disclosed below.
+  notes: >-
+    All Lean code in this repository was written by the listed models under the close supervision of the
+    author. Every proof is checked by the Lean kernel; the library contains no sorry and no custom axiom.
+
+fidelity:
+  divergences: >-
+    Theorem A specifies the process through its generator: the statement holds for every conservative Feller
+    semigroup whose generator acts as the divergence-form operator on twice continuously differentiable functions
+    vanishing at infinity, and every continuous-path law with its transition kernels, and an existence clause
+    asserts that such a process exists almost surely; the convergence holds for every starting point outside one
+    null set. The coefficient field is the recentred field nu Id + (k - k(0)), which defines the same operator. Assumption
+    (J1) is stated with the sigma-fields of pointwise restrictions; (J3) is realized by a stored C^2 shell carrier
+    (the paper's C^{1,1}_loc); the constants of (J5) are explicit parameters; stationarity is assumed shell by
+    shell (equivalent to joint stationarity under (J2)). Further readings of individual printed statements are
+    recorded in the docstrings of the statement files under SuperdiffusionCLT/Frozen.
+
+review:
+  status: "author-verified"
+  reviewers:
+    - "Scott Armstrong"
+  notes: >-
+    Correctness of every proof is checked by the Lean kernel and mathlib (no sorry, no custom axiom). The
+    author approved the formal statements of the main results and the disclosed differences from the paper. This
+    is not external peer review.
+
+alignment:
+  namespace: "SuperdiffusionCLT"
+  statements:
+    - source: "Theorem A (quenched superdiffusive invariance principle)"
+      lean: "SuperdiffusionCLT.Frozen.Section8.theoremA"
+      module: "SuperdiffusionCLT.Frozen.Section8.TheoremA"
+      status: "proved"
+    - source: "Theorem B (quantitative homogenization)"
+      lean: "SuperdiffusionCLT.Frozen.Section7.superdiffusivity"
+      module: "SuperdiffusionCLT.Frozen.Section7.Superdiffusivity"
+      status: "proved"
+    - source: "Theorem C (large-scale C^{0,gamma} estimate)"
+      lean: "SuperdiffusionCLT.Frozen.Section7.large_scale_holder"
+      module: "SuperdiffusionCLT.Frozen.Section7.LargeScaleHolder"
+      status: "proved"
+    - source: "Theorem D (large-scale C^{1,gamma} estimate)"
+      lean: "SuperdiffusionCLT.Frozen.Section6.c1beta"
+      module: "SuperdiffusionCLT.Frozen.Section6.C1Beta"
+      status: "proved"
+    - source: "Theorem 5.1 (asymptotics for the renormalized diffusivities)"
+      lean: "SuperdiffusionCLT.Frozen.Section5.sigmaBar_sharp_bounds"
+      module: "SuperdiffusionCLT.Frozen.Section5.SigmaBarSharpBounds"
+      status: "proved"
+
+acknowledgements: >-
+  Built on Lean 4, Mathlib, Lake, the CoarseGraining library and the MarkovProcess library.

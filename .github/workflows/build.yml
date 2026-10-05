@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # mathlib's cache, CoarseGraining, MarkovProcess and the library's build take about 19 GB.
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/boost /usr/lib/jvm /usr/local/.ghcup /opt/microsoft /usr/share/swift
+          sudo docker image prune --all --force >/dev/null 2>&1 || true
+          df -h /
+
+      # Install the toolchain from `lean-toolchain` and fetch the Mathlib cache. CoarseGraining and
+      # MarkovProcess have no olean cache and are compiled from source, as is this library.
+      - name: Set up Lean and Mathlib cache
+        uses: leanprover/lean-action@v1
+        with:
+          build: false
+          use-mathlib-cache: true
+
+      - name: Warning-free build
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build 2>&1 | tee build.log
+          if grep -iE '^warning:|declaration uses .sorry' build.log; then
+            echo "The build emitted a warning."
+            exit 1
+          fi
+
+      - name: Axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean SuperdiffusionCLT/Meta/AxiomsAudit.lean 2>&1 | tee axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          source = Path('SuperdiffusionCLT/Meta/AxiomsAudit.lean').read_text()
+          expected = set(re.findall(r'^#print axioms ([\w.]+)$', source, re.M))
+          blocks = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",
+                              Path('axioms.log').read_text(), re.S)
+          if not expected or {name for name, _ in blocks} != expected or len(blocks) != len(expected):
+              raise SystemExit('Missing or duplicate axiom report')
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for name, body in blocks:
+              axioms = {a.strip() for a in body.split(',') if a.strip()}
+              if not axioms <= allowed:
+                  raise SystemExit(f'{name} depends on {sorted(axioms - allowed)}')
+          print(f'{len(blocks)} theorems, standard axioms only')
+          PY
