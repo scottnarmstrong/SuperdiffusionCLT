@@ -41,7 +41,7 @@ sources:
       - "Scott Armstrong"
       - "Tuomo Kuusi"
     type: "paper"
-    relationship: "uses"
+    relationship: "background"
     note: >-
       Its Theorem 6.1 is an input of Section 4 of the paper; it is proved here, in corrected form (ERRATA.md,
       items AK1 to AK6), for the cutoff fields of the paper.
