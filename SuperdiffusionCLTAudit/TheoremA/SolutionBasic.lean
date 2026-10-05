@@ -15,7 +15,7 @@ public import Mathlib.Analysis.Matrix.Normed
 
 A Mathlib-only statement of Theorem A of Armstrong–Bou-Rabee–Kuusi, *Superdiffusive central
 limit theorem for a Brownian particle in a critically-correlated incompressible random drift*
-(arXiv:2404.01115): the quenched superdiffusive invariance principle.
+(Invent. Math., to appear): the quenched superdiffusive invariance principle.
 
 The random environment is a sequence `ω = (jₙ)ₙ` of shells: `C²` skew-symmetric matrix fields on
 `ℝ^d`, `d ≥ 2`, with joint law `P` subject to the standing assumptions (prefix: stationarity) and

@@ -2,7 +2,7 @@
 
 `TheoremA/Challenge.lean` restates Theorem A of Armstrong–Bou-Rabee–Kuusi, *Superdiffusive
 central limit theorem for a Brownian particle in a critically-correlated incompressible random
-drift* (arXiv:2404.01115), using Mathlib alone. Theorem A is the quenched superdiffusive
+drift* (Invent. Math., to appear), using Mathlib alone. Theorem A is the quenched superdiffusive
 invariance principle, together with its quenched and annealed bounds on the mean squared
 displacement.
 

@@ -4,7 +4,7 @@ A machine-checked **Lean 4** formalization of the paper
 
 > Scott Armstrong, Ahmed Bou-Rabee and Tuomo Kuusi,
 > [*Superdiffusive central limit theorem for a Brownian particle in a critically-correlated
-> incompressible random drift*](https://arxiv.org/abs/2404.01115), arXiv:2404.01115v3.
+> incompressible random drift*](https://link.springer.com/article/10.1007/s00222-026-01455-z), Invent. Math., to appear.
 
 The paper's main results, Theorems A, B, C and D and the asymptotics of the renormalized diffusivities
 (Theorem 5.1), are proved from its assumptions on the random drift, together with every result of Sections 2
@@ -55,7 +55,8 @@ assumptions are not vacuous: `SuperdiffusionCLT.Assumptions.ShellLaw.Model.exist
 constructs a nondegenerate Gaussian shell law satisfying all of them.
 
 The formalization found a few errors in the manuscript, all of them repairable without changing the main
-results; they are listed in [`ERRATA.md`](ERRATA.md), which refers to arXiv:2404.01115v3.
+results; they are listed in [`ERRATA.md`](ERRATA.md), whose page and equation numbers refer to the preprint
+arXiv:2404.01115v3.
 
 ## Guarantees
 

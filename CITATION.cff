@@ -31,8 +31,8 @@ references:
         given-names: Ahmed
       - family-names: Kuusi
         given-names: Tuomo
-    url: "https://arxiv.org/abs/2404.01115"
-    identifiers:
-      - type: other
-        value: "arXiv:2404.01115v3"
+    journal: "Inventiones Mathematicae"
+    status: in-press
+    doi: "10.1007/s00222-026-01455-z"
+    url: "https://link.springer.com/article/10.1007/s00222-026-01455-z"
     notes: "The paper formalized by this repository."

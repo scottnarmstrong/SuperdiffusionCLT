@@ -26,13 +26,14 @@ sources:
       - "Scott Armstrong"
       - "Ahmed Bou-Rabee"
       - "Tuomo Kuusi"
-    id: "arXiv:2404.01115"
-    url: "https://arxiv.org/abs/2404.01115"
+    id: "doi:10.1007/s00222-026-01455-z"
+    url: "https://link.springer.com/article/10.1007/s00222-026-01455-z"
     type: "paper"
     relationship: "formalizes"
     note: >-
-      Version 3 of the preprint. Corrections found during the formalization are listed in ERRATA.md; none of
-      them changes the statements of the main theorems of version 3.
+      Invent. Math., to appear. Corrections found during the formalization are listed in ERRATA.md (whose
+      locations refer to the preprint arXiv:2404.01115v3); none of them changes the statements of the main
+      theorems.
     license: "all rights reserved"
     author_contacted: "n/a"     # the formalizer is an author of the source
     prior_work: ""

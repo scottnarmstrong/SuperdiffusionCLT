@@ -97,7 +97,7 @@ rebuilt from its fields). In the other cases the bridge is a proved equivalence.
     the glob `.submodules Audit`. Lake therefore resolves every `Audit.*` import into those
     packages.
 
-## Differences from the printed statement (arXiv:2404.01115v3)
+## Differences from the printed statement
 
 The challenge states the theorem the library proves; where that differs from the printed Theorem A
 and assumptions, the difference is a reading of the text, never a weakening of the conclusion:
